@@ -1,0 +1,3 @@
+var searchIndex = {};
+searchIndex["lazy_static"] = {"doc":"A macro for declaring lazily evaluated statics.","items":[[8,"__Deref","lazy_static","The `Deref` trait is used to specify the functionality of dereferencing\noperations, like `*v`.",null,null],[16,"Target","","The resulting type after dereferencing",0,null],[10,"deref","","The method called to dereference a value",0,null],[0,"lazy","","",null,null],[3,"Lazy","lazy_static::lazy","",null,null],[11,"get","","",1,{"inputs":[{"name":"lazy"},{"name":"f"}],"output":{"name":"t"}}],[14,"__lazy_static_create!","lazy_static","",null,null],[14,"lazy_static!","","",null,null]],"paths":[[8,"__Deref"],[3,"Lazy"]]};
+initSearch(searchIndex);
