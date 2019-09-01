@@ -8,9 +8,9 @@
 extern crate core;
 extern crate std;
 
-use self::std::prelude::v1::*;
 use self::std::cell::Cell;
 use self::std::hint::unreachable_unchecked;
+use self::std::prelude::v1::*;
 use self::std::sync::Once;
 #[allow(deprecated)]
 pub use self::std::sync::ONCE_INIT;
@@ -27,9 +27,9 @@ impl<T: Sync> Lazy<T> {
     where
         F: FnOnce() -> T,
     {
-        self.1.call_once(|| {
-            self.0.set(Some(f()));
-        });
+        if !self.1.is_completed() {
+            self.init(f)
+        }
 
         // `self.0` is guaranteed to be `Some` by this point
         // The `Once` will catch and propagate panics
@@ -37,12 +37,25 @@ impl<T: Sync> Lazy<T> {
             match *self.0.as_ptr() {
                 Some(ref x) => x,
                 None => {
-                    debug_assert!(false, "attempted to derefence an uninitialized lazy static. This is a bug");
+                    debug_assert!(
+                        false,
+                        "attempted to derefence an uninitialized lazy static. This is a bug"
+                    );
 
                     unreachable_unchecked()
-                },
+                }
             }
         }
+    }
+
+    #[cfg_attr(feature = "cold", cold)]
+    fn init<F>(&self, f: F)
+    where
+        F: FnOnce() -> T,
+    {
+        self.1.call_once(|| {
+            self.0.set(Some(f()));
+        });
     }
 }
 

@@ -20,6 +20,7 @@ optional = true
 
 [features]
 spin_no_std = ["spin"]
+cold = []
 
 [dev-dependencies]
 doc-comment = "0.3.1"

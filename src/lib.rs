@@ -1,3 +1,4 @@
+#![feature(once_is_completed)]
 // Copyright 2016 lazy-static.rs Developers
 //
 // Licensed under the Apache License, Version 2.0, <LICENSE-APACHE or
